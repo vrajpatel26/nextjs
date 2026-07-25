@@ -1,11 +1,13 @@
+
 import Navbar from "@/component/Navbar"
 
 const ReliabilityPage = () => {
     return (
-        
-          
-            <div>Reliability</div>
-        
+
+
+        <div>Reliability</div>
+
+
     )
 }
 
