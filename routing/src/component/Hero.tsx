@@ -14,7 +14,7 @@ const Hero = () => {
     />
     </div>
         <div>
-            <h1 className=' flex justify-center pt-30 font-bold text-6xl p-5'>Welcome !</h1>
+            <h1 className='flex justify-center pt-30 font-bold text-6xl p-5'>Welcome !</h1>
         </div>
     </div>
   )
