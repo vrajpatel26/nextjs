@@ -50,3 +50,5 @@ next-env.d.ts
 
 # OpenAI Agents
 .agents/
+
+/src/generated/prisma
