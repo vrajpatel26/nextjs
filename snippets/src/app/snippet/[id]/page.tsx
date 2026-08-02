@@ -1,6 +1,8 @@
+import { deleteSnippet } from "@/actions";
 import { Button } from "@/components/ui/button";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 const SnippetDetailPage = async ({ params }: { params: Promise<{ id: string }> }) => {
 
@@ -9,13 +11,19 @@ const SnippetDetailPage = async ({ params }: { params: Promise<{ id: string }> }
     // const id = data.id
     const id = parseInt((await params).id);
 
+    // await new Promise ((r) => setTimeout(r,2000))
+
     const snippet = await prisma.snippet.findUnique({
         where: {
             id,
         }
     })
 
-    if (!snippet) return <h1>snippet not found</h1>
+    if (!snippet) return notFound()
+
+    const deleteSnippetAction = deleteSnippet.bind(null,snippet.id)
+
+
 
     return (
         <div className="w-[80%] mx-auto mt-10">
@@ -30,12 +38,15 @@ const SnippetDetailPage = async ({ params }: { params: Promise<{ id: string }> }
                             </Button>
                         </Link>
 
-                        <Button
-                            variant="destructive"
-                            className="cursor-pointer"
-                        >
-                            Delete
-                        </Button>
+                        <form action={deleteSnippetAction}>
+                            <Button
+                                type="submit"
+                                variant="destructive"
+                                className="cursor-pointer"
+                            >
+                                Delete
+                            </Button>
+                        </form>
                     </div>
                 </div>
 
@@ -48,5 +59,6 @@ const SnippetDetailPage = async ({ params }: { params: Promise<{ id: string }> }
         </div>
     )
 }
+
 
 export default SnippetDetailPage

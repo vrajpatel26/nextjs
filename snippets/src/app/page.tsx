@@ -12,7 +12,7 @@ export default async function Home() {
         <h1 className="text-3xl font-bold">Code Snippets</h1>
 
         <Link href="/snippet/new">
-          <Button className='cursor-pointer'>+ New Snippet</Button>
+          <Button className='cursor-pointer h-[40px] w-[120px] text-md'>+ New Snippet</Button>
         </Link>
       </div>
 
