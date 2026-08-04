@@ -1,34 +1,23 @@
+'use client'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { prisma } from '@/lib/prisma'
 import { redirect } from 'next/navigation'
-import React from 'react'
+import React, { useActionState } from 'react'
+import * as action from "@/actions"
 
 const createSnippet = () => {
-    async function createSnippet(formData:FormData) {
-        "use server"
+    
+  const [formStateData , xyz] = useActionState(action.createSnippet,{message:""})
 
-        const title = formData.get("title") as string
-        const code = formData.get("code") as string
-
-        const snippet = await prisma.snippet.create({
-            data:{
-                title,
-                code
-            }
-        })
-        console.log("created snippet",snippet)
-
-        redirect("/")
-    }
    return (
   <div className="w-4xl mx-auto mt-10">
     <div className="bg-gray-100 rounded-xl p-8">
       <h1 className="text-3xl font-bold mb-8">Create New Snippet</h1>
 
-      <form action={createSnippet} className="flex flex-col gap-6">
+      <form action={xyz} className="flex flex-col gap-6">
         <div className="flex flex-col gap-2">
           <Label htmlFor="title" className="text-lg font-medium">
             Title
@@ -55,6 +44,8 @@ const createSnippet = () => {
             className="w-full h-64 resize-none"
           />
         </div>
+
+      {formStateData.message && <div className='mt-2 p-2 bg-red-100 border-2 border-red-300'>{formStateData.message}</div>}
 
         <Button
           type="submit"
