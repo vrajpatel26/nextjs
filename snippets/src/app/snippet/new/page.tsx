@@ -10,14 +10,15 @@ import * as action from "@/actions"
 
 const createSnippet = () => {
     
-  const [formStateData , xyz] = useActionState(action.createSnippet,{message:""})
+  //const [state , formAction]= useActionState(createSnippet , initialState) ---- for demo (format)
+  const [formStateData , formAction] = useActionState(action.createSnippet,{message:""})
 
    return (
   <div className="w-4xl mx-auto mt-10">
     <div className="bg-gray-100 rounded-xl p-8">
       <h1 className="text-3xl font-bold mb-8">Create New Snippet</h1>
 
-      <form action={xyz} className="flex flex-col gap-6">
+      <form action={formAction} className="flex flex-col gap-6">
         <div className="flex flex-col gap-2">
           <Label htmlFor="title" className="text-lg font-medium">
             Title
